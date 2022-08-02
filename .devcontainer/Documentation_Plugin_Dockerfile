@@ -1,0 +1,27 @@
+ARG VARIANT="1.17-bullseye"
+# Golang
+FROM mcr.microsoft.com/vscode/devcontainers/go:0-${VARIANT}
+
+# Proxy
+# ARG PROXY=${PROXY}
+# ENV http_proxy=${PROXY}
+# ENV https_proxy=${PROXY}
+# ENV HTTP_PROXY=${PROXY}
+# ENV HTTPS_PROXY=${PROXY}
+
+# node
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && \
+  apt-get install -y nodejs
+
+# Hugo
+RUN apt-get update && apt-get install -y hugo
+
+# textlint
+RUN apt-get update && apt-get install vim -y && apt-get clean
+RUN npm install -g textlint \
+  textlint-rule-preset-ja-technical-writing \ 
+  textlint-rule-preset-ja-spacing \ 
+  textlint-rule-prh \ 
+  textlint-filter-rule-comments \ 
+  textlint-filter-rule-allowlist \
+  textlint-rule-no-todo 

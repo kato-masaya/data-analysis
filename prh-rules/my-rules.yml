@@ -1,0 +1,30 @@
+# M5統一辞書
+version: 1
+rules:
+  - expected: GitHub
+    pattern:
+      - github
+      - Github
+    prh: "GitHubで統一します"
+
+  - expected: VS Code
+    pattern: /vs ?code/i
+    specs:
+      - from: vscode
+        to: VS Code
+      - from: vs code
+        to: VS Code
+      - from: VS Code
+        to: VS Code
+    prh: "VS Codeで統一します"
+
+  - expected: Docker Image
+    pattern: /docker ?image/i
+    specs:
+      - from: docker image
+        to: Docker Image
+      - from: Docker image
+        to: Docker Image
+      - from: DockerImage
+        to: Docker Image
+    prh: "Docker Imageで統一します"

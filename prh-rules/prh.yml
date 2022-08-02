@@ -1,0 +1,15 @@
+version: 1
+
+imports:
+  - ./kanji-open.yml
+  - ./web+db.yml
+  - ./my-rules.yml
+
+rules:
+  # project configuration
+  - expected: （$1）
+    pattern:  /\(([^)]+)\)/
+    specs:
+      - from: (そのとおり)
+        to:   （そのとおり）
+    prh: "半角括弧は全角括弧にします"
