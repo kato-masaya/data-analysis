@@ -14,32 +14,27 @@
 
 # 1. データ分析基盤構成
 
-Azure でデータ分析基盤を構築するにあたり、以下のような構成例で考えます。
+Azure でデータ分析基盤を構築するにあたり、以下のような構成となります。
 
 ![Untitled](img/4_AzureDataAnalyticsInfra/Untitled.png)
 
-流れは以下のとおりです。
+大まかな流れは以下のとおりです。
 
 1. 分析対象のデータを Data Lake Storege に流し込む。
 2. Data Flow（Synapse Pipeline）で ETL/データ加工をする。
 3. 加工したデータを SQL Pool に配置&学習/検証用データを Azure Machine Learning で分析し、分析結果を SQL Pool に配置する。
 4. 分析結果および元データを PowerBI で可視化（=データ可視化）する。
 
-特に、Data Flow と Data Pool については **Data Factory** や **Synapse Analysis** で代替可能なので、そのように構成を変えても問題ありません。
+特に、Data Flow と Data Pool については **Data Factory** や **Synapse Analysis** で代替可能なので、本資料ではそのように構成を変えて必要なサービスについて触れていきます。
 
 データの準備・基礎集計・データ加工・モデル作成/評価・分析結果の可視化を行えれば問題ありません。
 
-- 参考：
+- 参考：[自動化されたエンタープライズ BI - Azure Architecture Center](https://docs.microsoft.com/ja-jp/azure/architecture/reference-architectures/data/enterprise-bi-adf)
 
-[自動化されたエンタープライズ BI - Azure Architecture Center](https://docs.microsoft.com/ja-jp/azure/architecture/reference-architectures/data/enterprise-bi-adf)
-
-以降では Synapse Analytics や Azure Machine Learning などの Azure 上でのデータ分析で必要なサービスに触れていきます。
+以降では **Synapse Analytics** や **Azure Machine Learning** などの Azure 上でのデータ分析で必要なサービスに触れていきます。
 
 なお、ここでは簡潔に触れていきます。
 
-- Synapse Analytics や Azure Machine Learning などを利用した際のインフラ構成例
-
-![azure-data-analysis.drawio](img/4_AzureDataAnalyticsInfra/azure-data-analysis.drawio)
 
 # 2. データ分析関連のサービス概要
 
