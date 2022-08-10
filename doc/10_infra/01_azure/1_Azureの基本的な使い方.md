@@ -1,5 +1,14 @@
 # 1. Azureの基本的な使い方
 
+# もくじ
+- [1. Azureの基本的な使い方](#1-azureの基本的な使い方)
+- [もくじ](#もくじ)
+- [1. Azureについて](#1-azureについて)
+  - [1.1. 概要](#11-概要)
+  - [1.2. メリット](#12-メリット)
+  - [1.3. デメリット](#13-デメリット)
+- [99. 参考](#99-参考)
+
 # 1. Azureについて
 
 ## 1.1. 概要
@@ -28,6 +37,4 @@ Microsoft Azure と言い、Windows を手掛ける Microsoft 社によって提
 
 # 99. 参考
 
-- [https://cashmo.jp/blog/2022/01/11/comparison-of-aws-gcp-azure/](https://cashmo.jp/blog/2022/01/11/comparison-of-aws-gcp-azure/)
-
-[3大クラウドAWS・GCP・Azureの比較](https://cashmo.jp/blog/2022/01/11/comparison-of-aws-gcp-azure/)
+- [3大クラウドAWS・GCP・Azureの比較](https://cashmo.jp/blog/2022/01/11/comparison-of-aws-gcp-azure/)

@@ -1,17 +1,52 @@
 # 7. Azure Machine Learningを使う
 
+# もくじ
+- [7. Azure Machine Learningを使う](#7-azure-machine-learningを使う)
+- [もくじ](#もくじ)
+- [1. Azure Machine Learning とは？](#1-azure-machine-learning-とは)
+  - [2. 全体像](#2-全体像)
+- [3. データの取り込み](#3-データの取り込み)
+  - [3.1. アセットからのデータ取込](#31-アセットからのデータ取込)
+- [4. モデルの学習](#4-モデルの学習)
+  - [4.1. ノートブックを使って学習する](#41-ノートブックを使って学習する)
+  - [4.2. AutoMLを使って学習する](#42-automlを使って学習する)
+    - [4.2.1. 概要と学習方法](#421-概要と学習方法)
+    - [4.2.2. 過学習への対策](#422-過学習への対策)
+  - [4.3. デザイナーを使って学習する](#43-デザイナーを使って学習する)
+    - [4.3.1. 概要と学習方法](#431-概要と学習方法)
+    - [4.3.2. モデルの選定方法](#432-モデルの選定方法)
+- [5. モデルの登録・デプロイ・推論](#5-モデルの登録デプロイ推論)
+  - [5.1. ノートブックを使ってデプロイする](#51-ノートブックを使ってデプロイする)
+    - [5.1.1. AutoMLの結果を利用する](#511-automlの結果を利用する)
+    - [5.1.2. モデルを登録する](#512-モデルを登録する)
+    - [5.1.3. ノートブックを使って推論する](#513-ノートブックを使って推論する)
+  - [5.2. AutoMLからデプロイする](#52-automlからデプロイする)
+  - [5.3. デザイナーから推論・デプロイをする](#53-デザイナーから推論デプロイをする)
+    - [5.3.1. デザイナーから推論する](#531-デザイナーから推論する)
+    - [5.3.2. デザイナーからデプロイする](#532-デザイナーからデプロイする)
+- [6. Tips](#6-tips)
+  - [6.1. Python SDKによるAzure Machine Learning上のアセットの操作](#61-python-sdkによるazure-machine-learning上のアセットの操作)
+    - [6.1.1. ノートブックを使用する](#611-ノートブックを使用する)
+    - [6.1.2. ローカルの環境からAzure Machine Learningを使用する](#612-ローカルの環境からazure-machine-learningを使用する)
+  - [6.2. 仮想マシンの作成・管理](#62-仮想マシンの作成管理)
+    - [6.2.1. 概要](#621-概要)
+    - [6.2.2. コンピューティングインスタンス](#622-コンピューティングインスタンス)
+    - [6.2.3. コンピューティングクラスター](#623-コンピューティングクラスター)
+    - [6.2.4. 推論クラスター](#624-推論クラスター)
+  - [6.3. 費用](#63-費用)
+- [99. 参考](#99-参考)
+
 # 1. Azure Machine Learning とは？
 
 [Azure Machine Learning](https://azure.microsoft.com/ja-jp/services/machine-learning/)　とは Azure のサービスの 1 つで、Azure で機械学習モデルを構築、運用できるプラットフォームです。
 
-Azure 上で**ノートブック**（Python）を用いたモデル構築だけでなく、データを投入するだけで自動的に最適なモデルやパラメータ探索をする **AutoML** や GUI ベースでパイプラインを構築できる **デザイナ** 機能もあり、幅広いユーザにとって活用場面のあるサービスです。
+Azure 上で **ノートブック**（Python）を用いたモデル構築だけでなく、データを投入するだけで自動的に最適なモデルやパラメータ探索をする **AutoML** や GUI ベースでパイプラインを構築できる **デザイナ** 機能もあり、幅広いユーザにとって活用場面のあるサービスです。
 
 利用方法は以下参考に記載しています。
 
 - [https://qiita.com/gnbrganchan/items/43e6c44754cb83220db5](https://qiita.com/gnbrganchan/items/43e6c44754cb83220db5)
-
 - 公式で出されている利用ガイド
-  - [https://docs.microsoft.com/ja-jp/learn/modules/use-automated-machine-learning/](https://docs.microsoft.com/ja-jp/learn/modules/use-automated-machine-learning/)
+：[https://docs.microsoft.com/ja-jp/learn/modules/use-automated-machine-learning/](https://docs.microsoft.com/ja-jp/learn/modules/use-automated-machine-learning/)
 
 ## 2. 全体像
 
@@ -48,7 +83,7 @@ Azure Machine Learning における機械学習モデルの構築・運用の流
 
 データの形式などは Azure 側である程度判別してくれるので、ユーザ側でそこまで細かい設定をする必要はありません。
 
-各種設定例は以下のとおりです。**[Azure Machine Learning のしくみ: リソースとアセット (v2)](https://docs.microsoft.com/ja-jp/azure/machine-learning/concept-azure-machine-learning-v2)もご参考ください。**
+各種設定例は以下のとおりです。[Azure Machine Learning のしくみ: リソースとアセット (v2)](https://docs.microsoft.com/ja-jp/azure/machine-learning/concept-azure-machine-learning-v2)もご参考ください。
 
 - **基本情報**
 
@@ -76,7 +111,7 @@ Azure Machine Learning のコア機能となるモデルの学習ですが、Pyt
 
 なお、詳細は以下公式ドキュメントをご参考ください。
 
-[Azure Machine Learning とは - Azure Machine Learning](https://docs.microsoft.com/ja-jp/azure/machine-learning/overview-what-is-azure-machine-learning)
+- [Azure Machine Learning とは - Azure Machine Learning](https://docs.microsoft.com/ja-jp/azure/machine-learning/overview-what-is-azure-machine-learning)
 
 ## 4.1. ノートブックを使って学習する
 
@@ -99,11 +134,11 @@ AutoML を使うと指定したデータ/メトリクスに対してさまざま
 
 ![Untitled](img/7_AzureMachineLearning/Untitled1.png)
 
-**データセットの選択**
+<u>**データセットの選択**</u>
 
 学習に使用するデータセットを選択します。データセットを登録済みであれば、登録したデータセットが表示されます。ここで初めてデータを登録も可能です。
 
-**実行の構成**
+<u>**実行の構成**</u>
 
 <!-- textlint-disable prh -->
 コンピューティングクラスターを選択します。
@@ -112,17 +147,17 @@ AutoML を使うと指定したデータ/メトリクスに対してさまざま
 
 <!-- textlint-enable prh -->
 
-**タスクの種類の選択**
+<u>**タスクの種類の選択**</u>
 
-今回の目的が**分類（カテゴリ値の予測）**なのか、**回帰（連続値の予測）**なのか、**時系列の予測**なのかを選択します。
+今回の目的が**分類（カテゴリ値の予測）**なのか、**回帰（連続値の予測）**なのか、**時系列の予測** なのかを選択します。
 
-**ハイパーパラメータの設定**
+<u>**ハイパーパラメータの設定**</u>
 
 ハイパーパラメータに関する設定します。
 
 自動でも行えるるため適宜設定が必要となります。
 
-**テストデータの指定**
+<u>**テストデータの指定**</u>
 
 テストデータを指定します。Azure Machine Learning 上でも作成可能ですが、元データのうちの ○ ％のデータをテストデータとして使用できません。
 
@@ -144,7 +179,7 @@ AutoML では以下のように過学習や不均衡データへの対策とし�
 
 詳細は以下ご参考ください。
 
-[AutoML でのオーバーフィット データと不均衡データの回避 - Azure Machine Learning](https://docs.microsoft.com/ja-jp/azure/machine-learning/concept-manage-ml-pitfalls)
+- [AutoML でのオーバーフィット データと不均衡データの回避 - Azure Machine Learning](https://docs.microsoft.com/ja-jp/azure/machine-learning/concept-manage-ml-pitfalls)
 
 <!-- textlint-disable prh -->
 ## 4.3. デザイナーを使って学習する
@@ -162,37 +197,37 @@ AutoML では完全に自動でモデルが選択・学習されますが、デ�
 
 利用方法については以下公式ドキュメントをご参照ください。
 
-- 参考：**[Azure Machine Learning デザイナーとは - Microsoft Docs](https://docs.microsoft.com/ja-jp/azure/machine-learning/concept-designer)**
+- 参考：[Azure Machine Learning デザイナーとは - Microsoft Docs](https://docs.microsoft.com/ja-jp/azure/machine-learning/concept-designer)
 
 以降ではメモ程度に記載していきます。
 
-> **💡Hint**
+> **💡Hint**  
 デザイナーで使うことができるモジュールは Azure Machine Learning 特有のもので、慣れるまでは使い勝手がわかりにくいため、初めのうちはサンプルをコピーしてデータセット等を書き換えながら使用することをおすすめします。
 > 
 
-今回は二値分類タスクを想定します。「Sample 3: Binary Classification with Feature Selection - Income Prediction」をベースにパイプラインを作成していきます。
-サンプルを開くと、作成済みのパイプラインが表示されます。
-デザイナーを使って学習するには、AutoML のときと同様にコンピューティングクラスターを設定する必要があります。
+今回は二値分類タスクを想定します。「Sample 3: Binary Classification with Feature Selection - Income Prediction」をベースにパイプラインを作成していきます。  
+サンプルを開くと、作成済みのパイプラインが表示されます。  
+デザイナーを使って学習するには、AutoML のときと同様にコンピューティングクラスターを設定する必要があります。  
 ここではあらかじめ作成したコンピューティングクラスターを使用します。
 このサンプルでは「Adult Census Income Binary Classification dataset」というデータセットを使っていますので、まずこれを今回学習させたいデータに置き換えます。
 
 ![Untitled](img/7_AzureMachineLearning/Untitled3.png)
 
-データセットは変更しましたが、予測対象とするカラムの情報などがサンプルのままなので、適宜書き換えます。（今回のターゲットは「Survived」列です）
+データセットは変更しましたが、予測対象とするカラムの情報などがサンプルのままなので、適宜書き換えます。（今回のターゲットは「Survived」列です）  
 
 ![Untitled](img/7_AzureMachineLearning/Untitled4.png)
 
-データセット・ターゲット列等を適切に設定したのち、「送信」をクリックするとパイプラインが動き出し、学習が始まります。
-各モジュールの設定が正しくされていれば問題なく進みますが、列名の指定等に誤りがあると、途中で実行が止まってしまいます。
-実行に失敗すると、下図のように失敗した箇所が赤く表示されます。
+データセット・ターゲット列等を適切に設定したのち、「送信」をクリックするとパイプラインが動き出し、学習が始まります。  
+各モジュールの設定が正しくされていれば問題なく進みますが、列名の指定等に誤りがあると、途中で実行が止まってしまいます。  
+実行に失敗すると、下図のように失敗した箇所が赤く表示されます。  
 
 ![Untitled](img/7_AzureMachineLearning/Untitled5.png)
 
-パイプラインを実行すると、`アセット⇒パイプライン` に表示されます。  
-ここで状態が「完了」となっていれば、パイプライン実行が問題なく完了したことになります。
+パイプラインを実行すると、`アセット⇒パイプライン` に表示されます。    
+ここで状態が「完了」となっていれば、パイプライン実行が問題なく完了したことになります。  
 
-モデルの学習結果については、デザイナーの画面から「Evaluate Model」モジュールをクリックすることで確認できます。
-Evaluate Model 画面から `「出力とログ」⇒「データ出力を表示する」⇒グラフのマーク（可視化）` をクリックすると、ROC 曲線などモデルの学習結果に関する情報を確認できます。
+モデルの学習結果については、デザイナーの画面から「Evaluate Model」モジュールをクリックすることで確認できます。  
+Evaluate Model 画面から `「出力とログ」⇒「データ出力を表示する」⇒グラフのマーク（可視化）` をクリックすると、ROC 曲線などモデルの学習結果に関する情報を確認できます。  
 
 ![Untitled](img/7_AzureMachineLearning/Untitled6.png)
 
@@ -218,25 +253,24 @@ Evaluate Model 画面から `「出力とログ」⇒「データ出力を表示
 
 アルゴリズム選定時には上記シートおよび以下をご参考ください。
 
-[機械学習アルゴリズム チート シート - デザイナー - Azure Machine Learning](https://docs.microsoft.com/ja-jp/azure/machine-learning/algorithm-cheat-sheet)
-
-[機械学習アルゴリズムの選択方法 - Azure Machine Learning](https://docs.microsoft.com/ja-jp/azure/machine-learning/how-to-select-algorithms)
+- [機械学習アルゴリズム チート シート - デザイナー - Azure Machine Learning](https://docs.microsoft.com/ja-jp/azure/machine-learning/algorithm-cheat-sheet)
+- [機械学習アルゴリズムの選択方法 - Azure Machine Learning](https://docs.microsoft.com/ja-jp/azure/machine-learning/how-to-select-algorithms)
 
 # 5. モデルの登録・デプロイ・推論
 
-学習したモデルを使って Web サービスを開始したり、新しいデータから予測値を算出するには、学習したモデルを登録する必要があります。Web サービスとして使用するためには更にデプロイが必要です。
-バッチ的に新しいデータを読み込ませて予測値を算出するだけであればデプロイする必要はなく、ノートブックから登録したモデルを呼び出すことで推論ができます。もちろんデプロイしても構いません。
+学習したモデルを使って Web サービスを開始したり、新しいデータから予測値を算出するには、学習したモデルを登録する必要があります。Web サービスとして使用するためには更にデプロイが必要です。  
+バッチ的に新しいデータを読み込ませて予測値を算出するだけであればデプロイする必要はなく、ノートブックから登録したモデルを呼び出すことで推論ができます。もちろんデプロイしても構いません。  
 
 ## 5.1. ノートブックを使ってデプロイする
 
 ### 5.1.1. AutoMLの結果を利用する
 
-AutoML で実行した実験結果をノートブックから取得・利用できます。
-実験結果の取得には Experiment()を使用します。
+AutoML で実行した実験結果をノートブックから取得・利用できます。  
+実験結果の取得には Experiment()を使用します。  
 
-以下の処理では、AutoML で作成した実験 titanic_exp01 において精度が最もよかったモデルを探索し、呼び出しています。
-experiment.get_runs(include_children = True)によって、子実験まで含めた全実験を取得し、**それぞれにおける精度を比較することで** 最良精度の実行 ID を max_acc_runid に保存しています。
-最後に、Run(experiment=experiment, run_id=max_acc_runid)によって実験 ID から実行結果を呼び出しています。
+以下の処理では、AutoML で作成した実験 titanic_exp01 において精度が最もよかったモデルを探索し、呼び出しています。  
+experiment.get_runs(include_children = True)によって、子実験まで含めた全実験を取得し、**それぞれにおける精度を比較することで** 最良精度の実行 ID を max_acc_runid に保存しています。  
+最後に、Run(experiment=experiment, run_id=max_acc_runid)によって実験 ID から実行結果を呼び出しています。  
 
 ```python
 # 実験名を指定して実験結果を取得
@@ -276,8 +310,8 @@ best_run = Run(experiment=experiment, run_id=max_acc_runid)
 
 ### 5.1.2. モデルを登録する
 
-Run.register_model によって、実行結果からモデルを登録できます。
-モデルを登録すると、Azure Machine Learning のアセット上で確認できるようになり、モデルのデプロイや呼び出しができるようになります。
+Run.register_model によって、実行結果からモデルを登録できます。  
+モデルを登録すると、Azure Machine Learning のアセット上で確認できるようになり、モデルのデプロイや呼び出しができるようになります。  
 
 ```python
 model = best_run.register_model(model_name = 'model_automl01', model_path = "", model_framework = Model.Framework.SCIKITLEARN)
@@ -303,7 +337,7 @@ sub.to_csv("./submission.csv", index = False)
 
 ## 5.2. AutoMLからデプロイする
 
-AutoML で実行した実験結果からモデルを選択し、デプロイしてサービスとして開始できます。
+AutoML で実行した実験結果からモデルを選択し、デプロイしてサービスとして開始できます。  
 `作成者⇒自動ML` または `アセット⇒実験` から実行した実験を選択し、その中からどれかモデルを選択すると画面上にデプロイが表示されます。
 
 ![Untitled](img/7_AzureMachineLearning/Untitled9.png)
@@ -330,7 +364,7 @@ AutoML で実行した実験結果からモデルを選択し、デプロイし�
 
 ### 5.3.1. デザイナーから推論する
 
-デザイナーで作成したモデルを使って推論するためには推論用のパイプラインを作成する必要があります。
+デザイナーで作成したモデルを使って推論するためには推論用のパイプラインを作成する必要があります。  
 推論パイプラインはトレーニングパイプラインのデザイナー画面から、「推論パイプラインの作成」をクリックすることで作成できます。
 
 ![Untitled](img/7_AzureMachineLearning/Untitled10.png)
@@ -347,13 +381,13 @@ AutoML で実行した実験結果からモデルを選択し、デプロイし�
 
 ### 6.1.1. ノートブックを使用する
 
-Azure Machine Learning 上のノートブック機能を使って、AutoML による学習など Azure Machine Learning の各種機能を利用できます。
+Azure Machine Learning 上のノートブック機能を使って、AutoML による学習など Azure Machine Learning の各種機能を利用できます。  
 ノートブックを使用するには後述のコンピューティングインスタンスが必要となります。
 
-**SDKの読み込み**
+<u>**SDKの読み込み**</u>
 
-始めに、Azure Machine Learning の各種機能を利用するためにライブラリをインポートする必要があります。
-インポートが問題なく完了すると、下記スクリプトの最後の print 文により SDK のバージョンが表示されます。
+始めに、Azure Machine Learning の各種機能を利用するためにライブラリをインポートする必要があります。  
+インポートが問題なく完了すると、下記スクリプトの最後の print 文により SDK のバージョンが表示されます。  
 
 ```python
 %matplotlib inline
@@ -375,7 +409,7 @@ print("Azure ML SDK Version: ", azureml.core.VERSION)
 > Azure ML SDK Version:  1.6.0
 ```
 
-**ワークスペースの読み込み**
+<u>**ワークスペースの読み込み**</u>
 
 次に、作業をするワークススペースを読み込みます。
 ワークスペースの読み込みには **サブスクリプションID・リソースグループ名・ワークスペース名** の 3 つの情報が必要となります。
@@ -405,15 +439,15 @@ Python SDK を使うことで、ローカルの環境から Azure Machine Learni
 
 ### 6.2.1. 概要
 
-Azure Machine Learning に使う仮想マシンの作成・管理についてまとめます。
-モデルの学習・推論に仮想マシンが必要なことは言うまでもないですが、Azure Machine Learning 上のワークブック機能を使う際にも仮想マシンが必要となります。
+Azure Machine Learning に使う仮想マシンの作成・管理についてまとめます。  
+モデルの学習・推論に仮想マシンが必要なことは言うまでもないですが、Azure Machine Learning 上のワークブック機能を使う際にも仮想マシンが必要となります。  
 
-Azure Machine Learning 上で扱う仮想マシンは、`ホーム画面から管理⇒コンピューティング` で確認できます。
+Azure Machine Learning 上で扱う仮想マシンは、`ホーム画面から管理⇒コンピューティング` で確認できます。  
 
 ![Untitled](img/7_AzureMachineLearning/Untitled12.png)
 
-Azure Machine Learning で扱う仮想マシンには、「コンピューティングインスタンス」「コンピューティングクラスター」「推論クラスター」「アタッチされたコンピューティング」の 4 種類があります。
-それぞれ、Azure 上でノートブック等を編集・実行するためのリソースや、ノードをいくつも立ち上げて学習・推論するためのインスタンスなど、役割が分かれています。
+Azure Machine Learning で扱う仮想マシンには、「コンピューティングインスタンス」「コンピューティングクラスター」「推論クラスター」「アタッチされたコンピューティング」の 4 種類があります。  
+それぞれ、Azure 上でノートブック等を編集・実行するためのリソースや、ノードをいくつも立ち上げて学習・推論するためのインスタンスなど、役割が分かれています。  
 また、PythonSDK を使う場合、ローカルの環境から Azure の実験を submit したり、資産を操作できます。
 
 - 各種コンピューティングインスタンスの役割
@@ -422,40 +456,40 @@ Azure Machine Learning で扱う仮想マシンには、「コンピューティ
 
 ### 6.2.2. コンピューティングインスタンス
 
-コンピューティングインスタンスはノートブックを使用するための仮想マシンです。
-コンピューティングインスタンスを作成するにあたり必要な項目は下記の通りです。
+コンピューティングインスタンスはノートブックを使用するための仮想マシンです。  
+コンピューティングインスタンスを作成するにあたり必要な項目は下記の通りです。  
 
 [Untitled](https://www.notion.so/bceeeaa0ed594987b9199021f788f20f)
 
-作成完了すると一覧に現れます。
-コンピューティングインスタンスは、使用しないときは明示的に停止する必要がある（停止をしないと課金され続けてしまう）ため注意が必要です。
+作成完了すると一覧に現れます。  
+コンピューティングインスタンスは、使用しないときは明示的に停止する必要がある（停止をしないと課金され続けてしまう）ため注意が必要です。  
 
 ### 6.2.3. コンピューティングクラスター
 
-コンピューティングクラスターはモデルの学習するための仮想マシンです。前述のコンピューティングインスタンスと名前が似ていますが、目的が異なります。
+コンピューティングクラスターはモデルの学習するための仮想マシンです。前述のコンピューティングインスタンスと名前が似ていますが、目的が異なります。  
 
-コンピューティングクラスターを作成するにあたり必要な項目は下記の通りです。
+コンピューティングクラスターを作成するにあたり必要な項目は下記の通りです。  
 
 [Untitled](https://www.notion.so/7b9782bd986643bc9afd99f4db9355a6)
 
-コンピューティングクラスターの最小ノード数を 0 に設定していれば、作成直後はどのジョブも投入されていないため**自動的にノード数が0となり課金されません**。
-最小ノード数を 1 以上にすると何もしていなくてもノードが確保される状態となり費用が発生するので注意が必要です。
+コンピューティングクラスターの最小ノード数を 0 に設定していれば、作成直後はどのジョブも投入されていないため**自動的にノード数が0となり課金されません**。  
+最小ノード数を 1 以上にすると何もしていなくてもノードが確保される状態となり費用が発生するので注意が必要です。  
 
 ![Untitled](img/7_AzureMachineLearning/Untitled14.png)
 
 ### 6.2.4. 推論クラスター
 
-推論クラスターはモデルをデプロイ、推論するための仮想マシンです。
-推論クラスターを作成するにあたり必要な項目は下記の通りです。
+推論クラスターはモデルをデプロイ、推論するための仮想マシンです。  
+推論クラスターを作成するにあたり必要な項目は下記の通りです。  
 
 [Untitled](https://www.notion.so/a340b88f0bda4653b8911ba18ae37d30)
 
-推論クラスターはアタッチされている間、費用が発生し続けます。
-そのため、必要のない推論クラスターはデタッチまたは削除する必要があります。
+推論クラスターはアタッチされている間、費用が発生し続けます。  
+そのため、必要のない推論クラスターはデタッチまたは削除する必要があります。  
 
 ![Untitled](img/7_AzureMachineLearning/Untitled15.png)
 
-推論クラスターをデタッチすると一覧から消えてしまいますが、再度推論クラスターの作成画面を開き、Kubernetes Service の項目で「既存のものを使用」を選択すると先ほどデタッチした推論クラスターを選択し、再度アタッチできます。
+推論クラスターをデタッチすると一覧から消えてしまいますが、再度推論クラスターの作成画面を開き、Kubernetes Service の項目で「既存のものを使用」を選択すると先ほどデタッチした推論クラスターを選択し、再度アタッチできます。  
 
 ![Untitled](img/7_AzureMachineLearning/Untitled16.png)
 
@@ -465,22 +499,12 @@ Azure Machine Learning の費用については[Azure Machine Learning の価格
 
 # 99. 参考
 
-- [https://qiita.com/gnbrganchan/items/43e6c44754cb83220db5](https://qiita.com/gnbrganchan/items/43e6c44754cb83220db5)
-
-[Azure Machine Learningのいろは - Qiita](https://qiita.com/gnbrganchan/items/43e6c44754cb83220db5)
+- [Azure Machine Learningのいろは - Qiita](https://qiita.com/gnbrganchan/items/43e6c44754cb83220db5)
 
 - [https://www.simpletraveler.jp/2022/03/21/azuremachinelearning-automl-tutorials/](https://www.simpletraveler.jp/2022/03/21/azuremachinelearning-automl-tutorials/)
 
-[https://www.simpletraveler.jp/2022/03/21/azuremachinelearning-automl-tutorials/](https://www.simpletraveler.jp/2022/03/21/azuremachinelearning-automl-tutorials/)
+- [Azure Machine Learning (v2) のしくみ - Azure Machine Learning](https://docs.microsoft.com/ja-jp/azure/machine-learning/concept-azure-machine-learning-v2?tabs=cli)
 
-- [https://docs.microsoft.com/ja-jp/azure/machine-learning/concept-azure-machine-learning-v2?tabs=cli](https://docs.microsoft.com/ja-jp/azure/machine-learning/concept-azure-machine-learning-v2?tabs=cli)
+- [Azure Machine Learning のドキュメント](https://docs.microsoft.com/ja-jp/azure/machine-learning/)
 
-[Azure Machine Learning (v2) のしくみ - Azure Machine Learning](https://docs.microsoft.com/ja-jp/azure/machine-learning/concept-azure-machine-learning-v2?tabs=cli)
-
-- [https://docs.microsoft.com/ja-jp/azure/machine-learning/](https://docs.microsoft.com/ja-jp/azure/machine-learning/)
-
-[Azure Machine Learning のドキュメント](https://docs.microsoft.com/ja-jp/azure/machine-learning/)
-
-- [https://docs.microsoft.com/ja-jp/learn/modules/use-automated-machine-learning/](https://docs.microsoft.com/ja-jp/learn/modules/use-automated-machine-learning/)
-
-[Azure Machine Learning で自動機械学習を使用する - Learn](https://docs.microsoft.com/ja-jp/learn/modules/use-automated-machine-learning/)
+- [Azure Machine Learning で自動機械学習を使用する - Learn](https://docs.microsoft.com/ja-jp/learn/modules/use-automated-machine-learning/)
