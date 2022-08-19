@@ -9,12 +9,21 @@ code:
   copy: true
   maxShownLines: 50
 math:
-  enable: true
+  enable: false
 ---
 
-# データの前処理とは
 
-# 1. データの前処理とは
+
+## データの前処理とは
+## もくじ
+- [データの前処理とは](#データの前処理とは)
+- [もくじ](#もくじ)
+- [1. データの前処理とは](#1-データの前処理とは)
+- [2. 前処理の必要性](#2-前処理の必要性)
+- [3. データ前処理の流れ](#3-データ前処理の流れ)
+- [99. 参考](#99-参考)
+
+## 1. データの前処理とは
 
 データの前処理とは、得られたデータを何らかの機械学習アルゴリズムへ入れる前に、そのデータに何かしら手を加えることをいいます。
 
@@ -24,7 +33,7 @@ math:
 
 ![data_cleaning](/images/data-preprocessing/0_whats-data-preprocessing/data_cleaning_image.png)
 
-# 2. 前処理の必要性
+## 2. 前処理の必要性
 
 まず、何らかの手段で欲しいデータが手に入ったとして、そのデータが完璧である可能性はほぼありません。
 
@@ -38,7 +47,7 @@ math:
 
 ![data_cleaning_flow](/images/data-preprocessing/0_whats-data-preprocessing/data_cleaning_flow.png)
 
-# 3. データ前処理の流れ
+## 3. データ前処理の流れ
 
 データ前処理の流れは以下のようになります。これら流れに沿って触れていきます。
 
@@ -55,7 +64,7 @@ math:
     - 他のデータをマージ
     - 特徴量の追加
 
-# 99. 参考
+## 99. 参考
 
 - [【機械学習入門】機械学習に向けてのデータ前処理 - Avintonジャパン株式会社](https://avinton.com/blog/2018/01/data-processing/)
 

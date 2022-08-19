@@ -1,0 +1,17 @@
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    ><url>
+            <loc>http://example.org/infra/first_post/</loc><lastmod>2022-08-19T18:08:53&#43;09:00</lastmod></url><url>
+            <loc>http://example.org/infra/</loc><lastmod>2022-08-19T18:08:53&#43;09:00</lastmod></url><url>
+            <loc>http://example.org/</loc><lastmod>2022-08-19T19:34:16&#43;09:00</lastmod></url><url>
+            <loc>http://example.org/visualization/first_post/</loc><lastmod>2022-08-19T18:08:53&#43;09:00</lastmod></url><url>
+            <loc>http://example.org/visualization/</loc><lastmod>2022-08-19T18:08:53&#43;09:00</lastmod></url><url>
+            <loc>http://example.org/evaluation/</loc><lastmod>2022-08-19T18:08:53&#43;09:00</lastmod></url><url>
+            <loc>http://example.org/evaluation/first_post/</loc><lastmod>2022-08-19T18:08:53&#43;09:00</lastmod></url><url>
+            <loc>http://example.org/modeling/first_post/</loc><lastmod>2022-08-19T18:08:53&#43;09:00</lastmod></url><url>
+            <loc>http://example.org/modeling/</loc><lastmod>2022-08-19T18:08:53&#43;09:00</lastmod></url><url>
+            <loc>http://example.org/data-preprocessing/0_what-is-data-pre-processing/</loc><lastmod>2022-08-19T19:34:16&#43;09:00</lastmod></url><url>
+            <loc>http://example.org/data-preprocessing/</loc><lastmod>2022-08-19T19:34:16&#43;09:00</lastmod></url><url>
+            <loc>http://example.org/categories/</loc></url><url>
+            <loc>http://example.org/tags/</loc></url></urlset>
