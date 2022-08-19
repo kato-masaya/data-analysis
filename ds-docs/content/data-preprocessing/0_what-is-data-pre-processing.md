@@ -1,0 +1,66 @@
+---
+title: "0_データの前処理とは"
+date: 2022-08-19T07:59:50Z
+draft: false
+toc:
+  enable: true
+  auto: true
+code:
+  copy: true
+  maxShownLines: 50
+math:
+  enable: true
+---
+
+# データの前処理とは
+
+# 1. データの前処理とは
+
+データの前処理とは、得られたデータを何らかの機械学習アルゴリズムへ入れる前に、そのデータに何かしら手を加えることをいいます。
+
+用意した”生”のデータを、アルゴリズムが学習できる、あるいは学習しやすいように**”きれいな”データに整える**、といったようなイメージです。
+
+- 機械学習のフロー
+
+![data_cleaning](/images/data-preprocessing/0_whats-data-preprocessing/data_cleaning_image.png)
+
+# 2. 前処理の必要性
+
+まず、何らかの手段で欲しいデータが手に入ったとして、そのデータが完璧である可能性はほぼありません。
+
+大抵データ内には欠損、ノイズ、エラー値などがあります。これらは無視してもよい場合もありますが、データの欠けに対しては適切な値で埋めたり、好ましくないデータ値は除いたりする必要があります。
+
+さらに生のデータというのは、今の値の見え方がそのデータの内部構造や関係性を表すのにベストであることはめったにありません。最大限にそのデータを活用するには、何らかの統計的処理を施す必要があります。
+
+たとえば、ランダムフォレストは null 値に対応していないので、その値には何かしら手を加える必要があります。ニューラルネットワークに画像を流すときも、大抵流せる画像のサイズは固定なので、大きすぎたり小さすぎたりする画像はリサイズする必要があります。
+
+以上のような理由から、機械学習アルゴリズムへ与える前に、事前に得られた生のデータをできるだけ構造や関係性がつかみやすく、かつ機械学習アルゴリズムが学習しやすいような形に整えてあげる必要があります。
+
+![data_cleaning_flow](/images/data-preprocessing/0_whats-data-preprocessing/data_cleaning_flow.png)
+
+# 3. データ前処理の流れ
+
+データ前処理の流れは以下のようになります。これら流れに沿って触れていきます。
+
+1. 事前分析
+    - データの情報量、状態などをチェックする。
+2. クリーニング
+    - 列名の変更
+    - 表記揺らぎのチェック
+    - 重複行のチェック
+    - 欠損値のチェック
+    - 不要列の削除
+3. 加工・変換・構成変更
+    - 列の追加
+    - 他のデータをマージ
+    - 特徴量の追加
+
+# 99. 参考
+
+- [【機械学習入門】機械学習に向けてのデータ前処理 - Avintonジャパン株式会社](https://avinton.com/blog/2018/01/data-processing/)
+
+- [Python Pandas データ前処理 個人メモ - Qiita](https://qiita.com/jooji/items/89fc03018e31f3e89519)
+
+- [https://www.teijitaisya.com/python-pandas-datacleansing/#index_id4](https://www.teijitaisya.com/python-pandas-datacleansing/#index_id4)
+
+- [https://aiacademy.jp/texts/show/?id=187](https://aiacademy.jp/texts/show/?id=187)
