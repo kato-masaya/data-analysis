@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data-preprocessings on Rudimentary Data Analysis Docs</title>
+    <link>http://example.org/data-preprocessing/</link>
+    <description>Recent content in Data-preprocessings on Rudimentary Data Analysis Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <copyright>kato masaya</copyright>
+    <lastBuildDate>Fri, 19 Aug 2022 07:59:50 +0000</lastBuildDate><atom:link href="http://example.org/data-preprocessing/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>0_データの前処理とは</title>
+      <link>http://example.org/data-preprocessing/0_what-is-data-pre-processing/</link>
+      <pubDate>Fri, 19 Aug 2022 07:59:50 +0000</pubDate>
+      
+      <guid>http://example.org/data-preprocessing/0_what-is-data-pre-processing/</guid>
+      <description>データの前処理とは Table of Contents データの前処理とは Table of Contents 1. データの前処理とは 2. 前処理の必要性 3. データ前処理の流れ 99. 参考 1. データの前処理とは データの前</description>
+    </item>
+    
+  </channel>
+</rss>
