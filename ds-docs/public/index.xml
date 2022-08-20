@@ -3,7 +3,7 @@
         <title>Rudimentary Data Analysis Docs</title>
         <link>http://example.org/</link>
         <description>This is a rudimentary Data Analytics Docs</description>
-        <generator>Hugo -- gohugo.io</generator><language>ja</language><copyright>kato masaya</copyright><lastBuildDate>Fri, 19 Aug 2022 08:00:38 &#43;0000</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>ja-JA</language><copyright>kato masaya</copyright>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         </channel>
 </rss>
