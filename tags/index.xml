@@ -1,0 +1,23 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Tags - Tag - Rudimentary Data Analysis Docs</title>
+        <link>http://kato-masaya.github.io/data-analysis/tags/</link>
+        <description>Tags - Tag - Rudimentary Data Analysis Docs</description>
+        <generator>Hugo -- gohugo.io</generator><language>ja-JA</language><copyright>kato masaya</copyright><lastBuildDate>Sat, 20 Aug 2022 08:41:45 &#43;0000</lastBuildDate><atom:link href="http://kato-masaya.github.io/data-analysis/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>1_データ前処理</title>
+    <link>http://kato-masaya.github.io/data-analysis/tags/1_%E3%83%87%E3%83%BC%E3%82%BF%E5%89%8D%E5%87%A6%E7%90%86/</link>
+    <pubDate>Sat, 20 Aug 2022 08:41:45 &#43;0000</pubDate>
+    <author>kato masaya</author>
+    <guid>http://kato-masaya.github.io/data-analysis/tags/1_%E3%83%87%E3%83%BC%E3%82%BF%E5%89%8D%E5%87%A6%E7%90%86/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>データクリーニング</title>
+    <link>http://kato-masaya.github.io/data-analysis/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0/</link>
+    <pubDate>Sat, 20 Aug 2022 08:41:45 &#43;0000</pubDate>
+    <author>kato masaya</author>
+    <guid>http://kato-masaya.github.io/data-analysis/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>

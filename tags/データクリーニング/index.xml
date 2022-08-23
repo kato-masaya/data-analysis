@@ -1,0 +1,23 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>データクリーニング - Tag - Rudimentary Data Analysis Docs</title>
+        <link>http://kato-masaya.github.io/data-analysis/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0/</link>
+        <description>データクリーニング - Tag - Rudimentary Data Analysis Docs</description>
+        <generator>Hugo -- gohugo.io</generator><language>ja-JA</language><copyright>kato masaya</copyright><lastBuildDate>Sat, 20 Aug 2022 08:41:45 &#43;0000</lastBuildDate><atom:link href="http://kato-masaya.github.io/data-analysis/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0/" rel="self" type="application/rss+xml" /><item>
+    <title>1_欠損値への対応</title>
+    <link>http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/2_data-cleaning/1_missing-data/</link>
+    <pubDate>Sat, 20 Aug 2022 08:41:45 &#43;0000</pubDate>
+    <author>kato masaya</author>
+    <guid>http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/2_data-cleaning/1_missing-data/</guid>
+    <description><![CDATA[欠損値への対応 もくじ 欠損値への対応 もくじ 1. 欠損値とは 2. 欠損値の種類 2.1. Missing Completely At Random (MCAR) 2.2. Missing At Random (MAR) 2.3. Missing Not At Random (MNAR) 3. 欠損値の対処法一覧 4. リストワイズ削除 5.]]></description>
+</item>
+<item>
+    <title>0_クリーニング作業のポイント</title>
+    <link>http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/2_data-cleaning/0_what-to-do-the-cleaning-operation/</link>
+    <pubDate>Sat, 20 Aug 2022 08:30:33 &#43;0000</pubDate>
+    <author>kato masaya</author>
+    <guid>http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/2_data-cleaning/0_what-to-do-the-cleaning-operation/</guid>
+    <description><![CDATA[クリーニング作業のポイント もくじ クリーニング作業のポイント もくじ 1. クリーニング作業でやるべきこと 2. 列名・表記揺らぎ・データ型のチェック 3. 重複]]></description>
+</item>
+</channel>
+</rss>

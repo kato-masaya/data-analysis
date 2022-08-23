@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ja-JA">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>0_クリーニング作業のポイント - Rudimentary Data Analysis Docs</title><meta name="Description" content="This is a rudimentary Data Analytics Docs"><meta property="og:title" content="0_クリーニング作業のポイント" />
+<meta property="og:description" content="クリーニング作業のポイント もくじ クリーニング作業のポイント もくじ 1. クリーニング作業でやるべきこと 2. 列名・表記揺らぎ・データ型のチェック 3. 重複" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/2_data-cleaning/0_what-to-do-the-cleaning-operation/" />
+<meta property="og:image" content="http://kato-masaya.github.io/logo.png"/>
+<meta property="article:published_time" content="2022-08-20T08:30:33+00:00" />
+<meta property="article:modified_time" content="2022-08-23T18:29:16+09:00" /><meta property="og:site_name" content="Rudimentary Data Analytics Docs" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://kato-masaya.github.io/logo.png"/>
+
+<meta name="twitter:title" content="0_クリーニング作業のポイント"/>
+<meta name="twitter:description" content="クリーニング作業のポイント もくじ クリーニング作業のポイント もくじ 1. クリーニング作業でやるべきこと 2. 列名・表記揺らぎ・データ型のチェック 3. 重複"/>
+<meta name="application-name" content="Rudimentary Data Analytics Docs">
+<meta name="apple-mobile-web-app-title" content="Rudimentary Data Analytics Docs"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="http://kato-masaya.github.io/data-analysis/images/kamome.svg"><link rel="apple-touch-icon" sizes="180x180" href="http://kato-masaya.github.io/data-analysis/apple-touch-icon.png"><link rel="mask-icon" href="http://kato-masaya.github.io/data-analysis/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="http://kato-masaya.github.io/data-analysis/site.webmanifest"><link rel="canonical" href="http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/2_data-cleaning/0_what-to-do-the-cleaning-operation/" /><link rel="prev" href="http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/1_preliminary-analysis-of-data/" /><link rel="next" href="http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/2_data-cleaning/1_missing-data/" /><link rel="stylesheet" href="http://kato-masaya.github.io/data-analysis/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "0_クリーニング作業のポイント",
+        "inLanguage": "ja-JA",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/kato-masaya.github.io\/data-analysis\/posts\/data-preprocessing\/2_data-cleaning\/0_what-to-do-the-cleaning-operation\/"
+        },"genre": "posts","keywords": "1_データ前処理, データクリーニング","wordcount":  1833 ,
+        "url": "http:\/\/kato-masaya.github.io\/data-analysis\/posts\/data-preprocessing\/2_data-cleaning\/0_what-to-do-the-cleaning-operation\/","datePublished": "2022-08-20T08:30:33+00:00","dateModified": "2022-08-23T18:29:16+09:00","license": "kato masaya","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "kato masaya"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="http://kato-masaya.github.io/data-analysis/" title="Rudimentary Data Analysis Docs">DA Docs</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="http://kato-masaya.github.io/data-analysis/posts/"> Posts </a><a class="menu-item" href="http://kato-masaya.github.io/data-analysis/tags/"> Tags </a><a class="menu-item" href="http://kato-masaya.github.io/data-analysis/categories/"> Categories </a><a class="menu-item" href="http://kato-masaya.github.io/data-analysis/data-preprocessing/"> Data Preprocessing </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="http://kato-masaya.github.io/data-analysis/" title="Rudimentary Data Analysis Docs">DA Docs</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="http://kato-masaya.github.io/data-analysis/posts/" title="">Posts</a><a class="menu-item" href="http://kato-masaya.github.io/data-analysis/tags/" title="">Tags</a><a class="menu-item" href="http://kato-masaya.github.io/data-analysis/categories/" title="">Categories</a><a class="menu-item" href="http://kato-masaya.github.io/data-analysis/data-preprocessing/" title="">Data Preprocessing</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">0_クリーニング作業のポイント</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://kato-masaya.github.io/data-analysis/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>kato masaya</a></span>&nbsp;<span class="post-category">included in <a href="http://kato-masaya.github.io/data-analysis/categories/1_%E3%83%87%E3%83%BC%E3%82%BF%E5%89%8D%E5%87%A6%E7%90%86/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>1_データ前処理</a>&nbsp;<a href="http://kato-masaya.github.io/data-analysis/categories/%E3%83%87%E3%83%BC%E3%82%BF%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>データクリーニング</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-20">2022-08-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1833 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#クリーニング作業のポイント">クリーニング作業のポイント</a></li>
+    <li><a href="#もくじ">もくじ</a></li>
+    <li><a href="#1-クリーニング作業でやるべきこと">1. クリーニング作業でやるべきこと</a></li>
+    <li><a href="#2-列名表記揺らぎデータ型のチェック">2. 列名・表記揺らぎ・データ型のチェック</a></li>
+    <li><a href="#3-重複行の削除">3. 重複行の削除</a></li>
+    <li><a href="#4-不要列の削除">4. 不要列の削除</a></li>
+    <li><a href="#99-参考">99. 参考</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="クリーニング作業のポイント">クリーニング作業のポイント</h2>
+<h2 id="もくじ">もくじ</h2>
+<ul>
+<li><a href="#%e3%82%af%e3%83%aa%e3%83%bc%e3%83%8b%e3%83%b3%e3%82%b0%e4%bd%9c%e6%a5%ad%e3%81%ae%e3%83%9d%e3%82%a4%e3%83%b3%e3%83%88" rel="">クリーニング作業のポイント</a></li>
+<li><a href="#%e3%82%82%e3%81%8f%e3%81%98" rel="">もくじ</a></li>
+<li><a href="#1-%e3%82%af%e3%83%aa%e3%83%bc%e3%83%8b%e3%83%b3%e3%82%b0%e4%bd%9c%e6%a5%ad%e3%81%a7%e3%82%84%e3%82%8b%e3%81%b9%e3%81%8d%e3%81%93%e3%81%a8" rel="">1. クリーニング作業でやるべきこと</a></li>
+<li><a href="#2-%e5%88%97%e5%90%8d%e8%a1%a8%e8%a8%98%e6%8f%ba%e3%82%89%e3%81%8e%e3%83%87%e3%83%bc%e3%82%bf%e5%9e%8b%e3%81%ae%e3%83%81%e3%82%a7%e3%83%83%e3%82%af" rel="">2. 列名・表記揺らぎ・データ型のチェック</a></li>
+<li><a href="#3-%e9%87%8d%e8%a4%87%e8%a1%8c%e3%81%ae%e5%89%8a%e9%99%a4" rel="">3. 重複行の削除</a></li>
+<li><a href="#4-%e4%b8%8d%e8%a6%81%e5%88%97%e3%81%ae%e5%89%8a%e9%99%a4" rel="">4. 不要列の削除</a></li>
+<li><a href="#99-%e5%8f%82%e8%80%83" rel="">99. 参考</a></li>
+</ul>
+<h2 id="1-クリーニング作業でやるべきこと">1. クリーニング作業でやるべきこと</h2>
+<p>クリーニング作業でやるべきことは以下のとおりです。</p>
+<ul>
+<li>列名の変更</li>
+<li>表記揺らぎのチェック</li>
+<li>重複行のチェック</li>
+<li>不要列の削除</li>
+<li>欠損値のチェック
+<ul>
+<li>別資料で触れます。</li>
+</ul>
+</li>
+<li>外れ値のチェック
+<ul>
+<li>別資料で触れます。</li>
+</ul>
+</li>
+<li>不均衡データのチェック
+<ul>
+<li>別資料で触れます。</li>
+</ul>
+</li>
+</ul>
+<p>別資料で掘り下げて触れるところもありますが、順を追って触れていきます。</p>
+<h2 id="2-列名表記揺らぎデータ型のチェック">2. 列名・表記揺らぎ・データ型のチェック</h2>
+<p>データの事前分析でも触れているように始めにデータの全体像を確認し、そこで列名や表記の揺らぎについても存在していないか確認する必要があります。</p>
+<p>以下参考にデータの列や型、表記など問題ないか確認してください。</p>
+<ul>
+<li>データ確認時のコマンド（df が対象のデータフレーム）</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#最大値、最小値、平均値、標準偏差などの参照</span>
+df<span style="color:#f92672">.</span>describe()
+<span style="color:#75715e">#各列のデータ型の参照</span>
+df<span style="color:#f92672">.</span>info()
+<span style="color:#75715e">#データの先頭数行を閲覧する</span>
+df<span style="color:#f92672">.</span>head()
+<span style="color:#75715e">#データの末尾数行を閲覧する</span>
+df<span style="color:#f92672">.</span>tail()
+<span style="color:#75715e">#データの次元数（何行、何列あるか）</span>
+df<span style="color:#f92672">.</span>shape
+<span style="color:#75715e"># 値の個数</span>
+df[<span style="color:#e6db74">&#34;column&#34;</span>]<span style="color:#f92672">.</span>value_counts()
+<span style="color:#75715e"># 値の個数（上と同じ）</span>
+pd<span style="color:#f92672">.</span>value_counts(df[<span style="color:#e6db74">&#34;column&#34;</span>])
+<span style="color:#75715e"># 列名の一覧①</span>
+df<span style="color:#f92672">.</span>columns
+<span style="color:#75715e"># 列名の一覧②</span>
+df<span style="color:#f92672">.</span>count()
+</code></pre></div><ul>
+<li>列名変更</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 列名の変更 (辞書形式で変更する)</span>
+df <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>rename(columns<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;品　　　名&#39;</span>:<span style="color:#e6db74">&#39;品名&#39;</span>})
+<span style="color:#75715e"># 列名の変更（一番最初の列を変更する）</span>
+df<span style="color:#f92672">.</span>rename(columns<span style="color:#f92672">=</span>{df<span style="color:#f92672">.</span>columns[<span style="color:#ae81ff">0</span>]: <span style="color:#e6db74">&#34;品名&#34;</span>})
+</code></pre></div><ul>
+<li>データの抽出・検索の例</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#特定の列の抽出（元データの変更はしない）</span>
+df[[<span style="color:#e6db74">&#34;colB&#34;</span>,<span style="color:#e6db74">&#34;colD&#34;</span>]]
+
+<span style="color:#75715e">#正規表現を使って抽出する</span>
+tanka_nan <span style="color:#f92672">=</span> df[<span style="color:#e6db74">&#34;単価&#34;</span>]<span style="color:#f92672">.</span>str<span style="color:#f92672">.</span>extract(<span style="color:#e6db74">&#34;(^\D*)&#34;</span>, expand<span style="color:#f92672">=</span>False)
+tanka_nan<span style="color:#f92672">.</span>value_counts()
+
+<span style="color:#75715e">#「[単価列の値が&#34;バルク品&#34;]の行抽出」且つ　「単価列の列抽出」で抽出</span>
+df<span style="color:#f92672">.</span>loc[df[<span style="color:#e6db74">&#34;単価&#34;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;バルク品&#34;</span>,<span style="color:#e6db74">&#34;単価&#34;</span>]
+
+<span style="color:#75715e"># リストから行フィルタし、新しいDFを作る</span>
+df2 <span style="color:#f92672">=</span> df[df[<span style="color:#e6db74">&#34;品番&#34;</span>]<span style="color:#f92672">.</span>isin(mylist)]
+</code></pre></div><p>また、データ型が適切か判断するには以下のように適切なデータ型か確認するようにしてください。</p>
+<ul>
+<li>データ型チェックの例</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#データ型の参照</span>
+df2<span style="color:#f92672">.</span>info()
+<span style="color:#75715e">#データ型の変換（新しい列の追加にて実現）</span>
+df[<span style="color:#e6db74">&#34;品番2&#34;</span>] <span style="color:#f92672">=</span> df[<span style="color:#e6db74">&#34;品番&#34;</span>]<span style="color:#f92672">.</span>astype(object)
+
+<span style="color:#75715e">#データ型の変換(元の列にそのまま代入して変換)</span>
+df_s[<span style="color:#e6db74">&#34;test&#34;</span>] <span style="color:#f92672">=</span> df_s[<span style="color:#e6db74">&#34;test&#34;</span>]<span style="color:#f92672">.</span>astype(object) <span style="color:#75715e"># object(string)</span>
+df_s[<span style="color:#e6db74">&#34;test&#34;</span>] <span style="color:#f92672">=</span> df_s[<span style="color:#e6db74">&#34;test&#34;</span>]<span style="color:#f92672">.</span>astype(str) <span style="color:#75715e"># object(string)</span>
+df_s[<span style="color:#e6db74">&#34;test&#34;</span>] <span style="color:#f92672">=</span> df_s[<span style="color:#e6db74">&#34;test&#34;</span>]<span style="color:#f92672">.</span>astype(float) <span style="color:#75715e"># Float</span>
+df_s[<span style="color:#e6db74">&#34;test&#34;</span>] <span style="color:#f92672">=</span> df_s[<span style="color:#e6db74">&#34;test&#34;</span>]<span style="color:#f92672">.</span>astype(int) <span style="color:#75715e"># integer</span>
+
+<span style="color:#75715e"># 型違いの値を強制的に排除（To Nan）しつつ数値型に変換</span>
+df_s[<span style="color:#e6db74">&#34;test&#34;</span>] <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>to_numeric(df_s[<span style="color:#e6db74">&#34;test&#34;</span>] , errors<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;coerce&#34;</span>)
+</code></pre></div><p>なお、数値型に変換する場合には、事前に文字列を数値にしておいたり、Null データを 0 にしておいたりといった作業も覚えておく必要があるので型チェック時には注意してください。</p>
+<h2 id="3-重複行の削除">3. 重複行の削除</h2>
+<p>重複を確認し、重複行を削除します。</p>
+<ul>
+<li>データフレームの定義と確認</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+
+df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame([[<span style="color:#e6db74">&#39;A&#39;</span>,<span style="color:#e6db74">&#39;a&#39;</span>,<span style="color:#ae81ff">110</span>], [<span style="color:#e6db74">&#39;C&#39;</span>,<span style="color:#e6db74">&#39;c&#39;</span>,<span style="color:#ae81ff">130</span>], [<span style="color:#e6db74">&#39;C&#39;</span>,<span style="color:#e6db74">&#39;c&#39;</span>,<span style="color:#ae81ff">130</span>], [<span style="color:#e6db74">&#39;D&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>,<span style="color:#ae81ff">140</span>],[<span style="color:#e6db74">&#39;A&#39;</span>,<span style="color:#e6db74">&#39;a&#39;</span>,<span style="color:#ae81ff">110</span>]],
+columns<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;col01&#39;</span>, <span style="color:#e6db74">&#39;col02&#39;</span>, <span style="color:#e6db74">&#39;col03&#39;</span>],
+index<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;idx01&#39;</span>, <span style="color:#e6db74">&#39;idx02&#39;</span>, <span style="color:#e6db74">&#39;idx03&#39;</span>,<span style="color:#e6db74">&#39;idx04&#39;</span>,<span style="color:#e6db74">&#39;idx05&#39;</span>])
+df
+</code></pre></div><ul>
+<li>pandas データフレームの drop_duplicates メソッド使用例</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">.</span>drop_duplicates()
+</code></pre></div><p>引数に何も指定しない場合は、要素の値がすべて重複する行を削除します。</p>
+<p>そのため、重複していた idx03 と idx05 が削除されます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">.</span>drop_duplicates(subset<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;col02&#39;</span>])
+</code></pre></div><p>カラムを指定して値の重複を削除するには、引数 subset にカラムを指定します。</p>
+<p>実行します。</p>
+<h2 id="4-不要列の削除">4. 不要列の削除</h2>
+<p>重複している列を例に不要列の削除例を記載します。</p>
+<ul>
+<li>データの準備</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame([
+    [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>],
+    [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">4</span>],
+    [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>]
+], columns <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;a&#34;</span>, <span style="color:#e6db74">&#34;a&#34;</span>, <span style="color:#e6db74">&#34;c&#34;</span>, <span style="color:#e6db74">&#34;d&#34;</span>])
+df
+</code></pre></div><ul>
+<li>カラム名の重複をを削除したいとき</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#重複してないカラム名のみ選択</span>
+df<span style="color:#f92672">.</span>loc[:,<span style="color:#f92672">~</span>df<span style="color:#f92672">.</span>columns<span style="color:#f92672">.</span>duplicated()]
+</code></pre></div><p>なお、以下のようにすると最後の a カラムが採用されます（参考：<a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.duplicated.html" target="_blank" rel="noopener noreffer ">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.duplicated.html</a>）。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">.</span>loc[:,<span style="color:#f92672">~</span>df<span style="color:#f92672">.</span>columns<span style="color:#f92672">.</span>duplicated(keep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;last&#34;</span>)]
+</code></pre></div><ul>
+<li>カラム要素の重複を削除したいとき</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#転置してから重複行を削除し，再度転置して元に戻す</span>
+df<span style="color:#f92672">.</span>T<span style="color:#f92672">.</span>drop_duplicates()<span style="color:#f92672">.</span>T
+</code></pre></div><p>カラム名重複のあるデータフレームを，カラムの欠損を保管し合う＆重複削除したいとき</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">agg_dup_col</span>(df_: pd<span style="color:#f92672">.</span>core<span style="color:#f92672">.</span>frame<span style="color:#f92672">.</span>DataFrame) <span style="color:#f92672">-&gt;</span> pd<span style="color:#f92672">.</span>core<span style="color:#f92672">.</span>frame<span style="color:#f92672">.</span>DataFrame:
+    <span style="color:#e6db74">&#39;&#39;&#39;カラム名重複のあるデータフレームを，カラムの欠損を保管し合う+重複削除し，データフレームとして返す
+</span><span style="color:#e6db74">    Args:
+</span><span style="color:#e6db74">        df_ (pd.core.frame.DataFrame): any dataframe
+</span><span style="color:#e6db74">    Returns:
+</span><span style="color:#e6db74">        pd.core.frame.DataFrame
+</span><span style="color:#e6db74">    &#39;&#39;&#39;</span>
+    df <span style="color:#f92672">=</span> df_<span style="color:#f92672">.</span>copy()
+    dup_col <span style="color:#f92672">=</span> set(df<span style="color:#f92672">.</span>columns[df<span style="color:#f92672">.</span>columns<span style="color:#f92672">.</span>duplicated()])
+    <span style="color:#66d9ef">for</span> col <span style="color:#f92672">in</span> dup_col:
+        value <span style="color:#f92672">=</span> [[v <span style="color:#66d9ef">for</span> v <span style="color:#f92672">in</span> values <span style="color:#66d9ef">if</span> v <span style="color:#f92672">==</span> v <span style="color:#f92672">and</span> v <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None]
+                 <span style="color:#66d9ef">for</span> values <span style="color:#f92672">in</span> df[col]<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>tolist()]
+        value <span style="color:#f92672">=</span> [v[<span style="color:#ae81ff">0</span>] <span style="color:#66d9ef">if</span> v <span style="color:#f92672">!=</span> [] <span style="color:#66d9ef">else</span> None <span style="color:#66d9ef">for</span> v <span style="color:#f92672">in</span> value]
+        df <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>drop(col, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+        df[col] <span style="color:#f92672">=</span> value
+    <span style="color:#66d9ef">return</span> df
+</code></pre></div><h2 id="99-参考">99. 参考</h2>
+<ul>
+<li>
+<p><a href="https://qiita.com/jooji/items/89fc03018e31f3e89519" target="_blank" rel="noopener noreffer ">Python Pandas データ前処理 個人メモ - Qiita</a></p>
+</li>
+<li>
+<p><a href="https://www.cresco.co.jp/blog/entry/18543/" target="_blank" rel="noopener noreffer ">https://www.cresco.co.jp/blog/entry/18543/</a></p>
+</li>
+<li>
+<p><a href="https://kino-code.com/python-pandas-drop_duplicates/" target="_blank" rel="noopener noreffer ">【毎日Python】Pandasのデータフレームの重複する行を削除する方法｜drop_duplicates</a></p>
+</li>
+<li>
+<p><a href="https://qiita.com/s2hap/items/6e8ddfa1c73363f6117e" target="_blank" rel="noopener noreffer ">https://qiita.com/s2hap/items/6e8ddfa1c73363f6117e</a></p>
+</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-08-23</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/2_data-cleaning/0_what-to-do-the-cleaning-operation/" data-title="0_クリーニング作業のポイント" data-hashtags="1_データ前処理,データクリーニング"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/2_data-cleaning/0_what-to-do-the-cleaning-operation/" data-hashtag="1_データ前処理"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/2_data-cleaning/0_what-to-do-the-cleaning-operation/" data-title="0_クリーニング作業のポイント"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/2_data-cleaning/0_what-to-do-the-cleaning-operation/" data-title="0_クリーニング作業のポイント"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/2_data-cleaning/0_what-to-do-the-cleaning-operation/" data-title="0_クリーニング作業のポイント"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="http://kato-masaya.github.io/data-analysis/tags/1_%E3%83%87%E3%83%BC%E3%82%BF%E5%89%8D%E5%87%A6%E7%90%86/">1_データ前処理</a>,&nbsp;<a href="http://kato-masaya.github.io/data-analysis/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0/">データクリーニング</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="http://kato-masaya.github.io/data-analysis/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/1_preliminary-analysis-of-data/" class="prev" rel="prev" title="1_データの事前分析"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>1_データの事前分析</a>
+            <a href="http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/2_data-cleaning/1_missing-data/" class="next" rel="next" title="1_欠損値への対応">1_欠損値への対応<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://kato-masaya.github.io/data-analysis/" target="_blank">kato masaya</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":-1},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30}};</script><script type="text/javascript" src="http://kato-masaya.github.io/data-analysis/js/theme.min.js"></script></body>
+</html>

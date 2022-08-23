@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ja-JA">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>データの前処理とは - Rudimentary Data Analysis Docs</title><meta name="Description" content="This is a rudimentary Data Analytics Docs"><meta property="og:title" content="データの前処理とは" />
+<meta property="og:description" content="データの前処理とは もくじ データの前処理とは もくじ 1. データの前処理とは 2. 前処理の必要性 3. データ前処理の流れ 99. 参考 1. データの前処理とは データの前" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/0_what-is-data-pre-processing/" />
+<meta property="og:image" content="http://kato-masaya.github.io/logo.png"/>
+<meta property="article:published_time" content="2022-08-19T16:12:51+00:00" />
+<meta property="article:modified_time" content="2022-08-23T18:29:16+09:00" /><meta property="og:site_name" content="Rudimentary Data Analytics Docs" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://kato-masaya.github.io/logo.png"/>
+
+<meta name="twitter:title" content="データの前処理とは"/>
+<meta name="twitter:description" content="データの前処理とは もくじ データの前処理とは もくじ 1. データの前処理とは 2. 前処理の必要性 3. データ前処理の流れ 99. 参考 1. データの前処理とは データの前"/>
+<meta name="application-name" content="Rudimentary Data Analytics Docs">
+<meta name="apple-mobile-web-app-title" content="Rudimentary Data Analytics Docs"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="http://kato-masaya.github.io/data-analysis/images/kamome.svg"><link rel="apple-touch-icon" sizes="180x180" href="http://kato-masaya.github.io/data-analysis/apple-touch-icon.png"><link rel="mask-icon" href="http://kato-masaya.github.io/data-analysis/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="http://kato-masaya.github.io/data-analysis/site.webmanifest"><link rel="canonical" href="http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/0_what-is-data-pre-processing/" /><link rel="next" href="http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/1_preliminary-analysis-of-data/" /><link rel="stylesheet" href="http://kato-masaya.github.io/data-analysis/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "データの前処理とは",
+        "inLanguage": "ja-JA",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/kato-masaya.github.io\/data-analysis\/posts\/data-preprocessing\/0_what-is-data-pre-processing\/"
+        },"genre": "posts","keywords": "1_データ前処理","wordcount":  873 ,
+        "url": "http:\/\/kato-masaya.github.io\/data-analysis\/posts\/data-preprocessing\/0_what-is-data-pre-processing\/","datePublished": "2022-08-19T16:12:51+00:00","dateModified": "2022-08-23T18:29:16+09:00","license": "kato masaya","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "kato masaya"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="http://kato-masaya.github.io/data-analysis/" title="Rudimentary Data Analysis Docs">DA Docs</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="http://kato-masaya.github.io/data-analysis/posts/"> Posts </a><a class="menu-item" href="http://kato-masaya.github.io/data-analysis/tags/"> Tags </a><a class="menu-item" href="http://kato-masaya.github.io/data-analysis/categories/"> Categories </a><a class="menu-item" href="http://kato-masaya.github.io/data-analysis/data-preprocessing/"> Data Preprocessing </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="http://kato-masaya.github.io/data-analysis/" title="Rudimentary Data Analysis Docs">DA Docs</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="http://kato-masaya.github.io/data-analysis/posts/" title="">Posts</a><a class="menu-item" href="http://kato-masaya.github.io/data-analysis/tags/" title="">Tags</a><a class="menu-item" href="http://kato-masaya.github.io/data-analysis/categories/" title="">Categories</a><a class="menu-item" href="http://kato-masaya.github.io/data-analysis/data-preprocessing/" title="">Data Preprocessing</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">データの前処理とは</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://kato-masaya.github.io/data-analysis/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>kato masaya</a></span>&nbsp;<span class="post-category">included in <a href="http://kato-masaya.github.io/data-analysis/categories/1_%E3%83%87%E3%83%BC%E3%82%BF%E5%89%8D%E5%87%A6%E7%90%86/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>1_データ前処理</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-08-19">2022-08-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;873 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#データの前処理とは">データの前処理とは</a></li>
+    <li><a href="#もくじ">もくじ</a></li>
+    <li><a href="#1-データの前処理とは">1. データの前処理とは</a></li>
+    <li><a href="#2-前処理の必要性">2. 前処理の必要性</a></li>
+    <li><a href="#3-データ前処理の流れ">3. データ前処理の流れ</a></li>
+    <li><a href="#99-参考">99. 参考</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="データの前処理とは">データの前処理とは</h2>
+<h2 id="もくじ">もくじ</h2>
+<ul>
+<li><a href="#%e3%83%87%e3%83%bc%e3%82%bf%e3%81%ae%e5%89%8d%e5%87%a6%e7%90%86%e3%81%a8%e3%81%af" rel="">データの前処理とは</a></li>
+<li><a href="#%e3%82%82%e3%81%8f%e3%81%98" rel="">もくじ</a></li>
+<li><a href="#1-%e3%83%87%e3%83%bc%e3%82%bf%e3%81%ae%e5%89%8d%e5%87%a6%e7%90%86%e3%81%a8%e3%81%af" rel="">1. データの前処理とは</a></li>
+<li><a href="#2-%e5%89%8d%e5%87%a6%e7%90%86%e3%81%ae%e5%bf%85%e8%a6%81%e6%80%a7" rel="">2. 前処理の必要性</a></li>
+<li><a href="#3-%e3%83%87%e3%83%bc%e3%82%bf%e5%89%8d%e5%87%a6%e7%90%86%e3%81%ae%e6%b5%81%e3%82%8c" rel="">3. データ前処理の流れ</a></li>
+<li><a href="#99-%e5%8f%82%e8%80%83" rel="">99. 参考</a></li>
+</ul>
+<h2 id="1-データの前処理とは">1. データの前処理とは</h2>
+<p>データの前処理とは、得られたデータを何らかの機械学習アルゴリズムへ入れる前に、そのデータに何かしら手を加えることをいいます。</p>
+<p>用意した”生”のデータを、アルゴリズムが学習できる、あるいは学習しやすいように**”きれいな”データに整える**、といったようなイメージです。</p>
+<ul>
+<li>機械学習のフロー</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="http://kato-masaya.github.io/data-analysis/svg/loading.min.svg"
+        data-src="http://kato-masaya.github.io/data-analysis/images/data-preprocessing/0_whats-data-preprocessing/data_cleaning_image.png"
+        data-srcset="http://kato-masaya.github.io/data-analysis/images/data-preprocessing/0_whats-data-preprocessing/data_cleaning_image.png, http://kato-masaya.github.io/data-analysis/images/data-preprocessing/0_whats-data-preprocessing/data_cleaning_image.png 1.5x, http://kato-masaya.github.io/data-analysis/images/data-preprocessing/0_whats-data-preprocessing/data_cleaning_image.png 2x"
+        data-sizes="auto"
+        alt="/images/data-preprocessing/0_whats-data-preprocessing/data_cleaning_image.png"
+        title="data_cleaning_image" /></p>
+<h2 id="2-前処理の必要性">2. 前処理の必要性</h2>
+<p>まず、何らかの手段で欲しいデータが手に入ったとして、そのデータが完璧である可能性はほぼありません。</p>
+<p>大抵データ内には欠損、ノイズ、エラー値などがあります。これらは無視してもよい場合もありますが、データの欠けに対しては適切な値で埋めたり、好ましくないデータ値は除いたりする必要があります。</p>
+<p>さらに生のデータというのは、今の値の見え方がそのデータの内部構造や関係性を表すのにベストであることはめったにありません。最大限にそのデータを活用するには、何らかの統計的処理を施す必要があります。</p>
+<p>たとえば、ランダムフォレストは null 値に対応していないので、その値には何かしら手を加える必要があります。ニューラルネットワークに画像を流すときも、大抵流せる画像のサイズは固定なので、大きすぎたり小さすぎたりする画像はリサイズする必要があります。</p>
+<p>以上のような理由から、機械学習アルゴリズムへ与える前に、事前に得られた生のデータをできるだけ構造や関係性がつかみやすく、かつ機械学習アルゴリズムが学習しやすいような形に整えてあげる必要があります。</p>
+<p><img
+        class="lazyload"
+        src="http://kato-masaya.github.io/data-analysis/svg/loading.min.svg"
+        data-src="http://kato-masaya.github.io/data-analysis/images/data-preprocessing/0_whats-data-preprocessing/data_cleaning_flow.png"
+        data-srcset="http://kato-masaya.github.io/data-analysis/images/data-preprocessing/0_whats-data-preprocessing/data_cleaning_flow.png, http://kato-masaya.github.io/data-analysis/images/data-preprocessing/0_whats-data-preprocessing/data_cleaning_flow.png 1.5x, http://kato-masaya.github.io/data-analysis/images/data-preprocessing/0_whats-data-preprocessing/data_cleaning_flow.png 2x"
+        data-sizes="auto"
+        alt="/images/data-preprocessing/0_whats-data-preprocessing/data_cleaning_flow.png"
+        title="data_cleaning_flow" /></p>
+<h2 id="3-データ前処理の流れ">3. データ前処理の流れ</h2>
+<p>データ前処理の流れは以下のようになります。これら流れに沿って触れていきます。</p>
+<ol>
+<li>事前分析
+<ul>
+<li>データの情報量、状態などをチェックする。</li>
+</ul>
+</li>
+<li>クリーニング
+<ul>
+<li>列名の変更</li>
+<li>表記揺らぎのチェック</li>
+<li>重複行のチェック</li>
+<li>欠損値のチェック</li>
+<li>不要列の削除</li>
+</ul>
+</li>
+<li>加工・変換・構成変更
+<ul>
+<li>列の追加</li>
+<li>他のデータをマージ</li>
+<li>特徴量の追加</li>
+</ul>
+</li>
+</ol>
+<h2 id="99-参考">99. 参考</h2>
+<ul>
+<li>
+<p><a href="https://avinton.com/blog/2018/01/data-processing/" target="_blank" rel="noopener noreffer ">【機械学習入門】機械学習に向けてのデータ前処理 - Avintonジャパン株式会社</a></p>
+</li>
+<li>
+<p><a href="https://qiita.com/jooji/items/89fc03018e31f3e89519" target="_blank" rel="noopener noreffer ">Python Pandas データ前処理 個人メモ - Qiita</a></p>
+</li>
+<li>
+<p><a href="https://www.teijitaisya.com/python-pandas-datacleansing/#index_id4" target="_blank" rel="noopener noreffer ">https://www.teijitaisya.com/python-pandas-datacleansing/#index_id4</a></p>
+</li>
+<li>
+<p><a href="https://aiacademy.jp/texts/show/?id=187" target="_blank" rel="noopener noreffer ">https://aiacademy.jp/texts/show/?id=187</a></p>
+</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-08-23</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/0_what-is-data-pre-processing/" data-title="データの前処理とは" data-hashtags="1_データ前処理"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/0_what-is-data-pre-processing/" data-hashtag="1_データ前処理"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/0_what-is-data-pre-processing/" data-title="データの前処理とは"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/0_what-is-data-pre-processing/" data-title="データの前処理とは"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/0_what-is-data-pre-processing/" data-title="データの前処理とは"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="http://kato-masaya.github.io/data-analysis/tags/1_%E3%83%87%E3%83%BC%E3%82%BF%E5%89%8D%E5%87%A6%E7%90%86/">1_データ前処理</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="http://kato-masaya.github.io/data-analysis/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="http://kato-masaya.github.io/data-analysis/posts/data-preprocessing/1_preliminary-analysis-of-data/" class="next" rel="next" title="1_データの事前分析">1_データの事前分析<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://kato-masaya.github.io/data-analysis/" target="_blank">kato masaya</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":-1},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30}};</script><script type="text/javascript" src="http://kato-masaya.github.io/data-analysis/js/theme.min.js"></script></body>
+</html>
