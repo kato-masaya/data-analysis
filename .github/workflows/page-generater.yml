@@ -23,7 +23,7 @@ jobs:
           # extended: true
 
       - name: Build Hugo pages
-        run: hugo --minify
+        run: hugo
         working-directory: ./ds-docs
 
       - name: Publish to GitHub Pages
