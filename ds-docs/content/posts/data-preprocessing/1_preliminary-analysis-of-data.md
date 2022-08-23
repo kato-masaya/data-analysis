@@ -1,7 +1,7 @@
 ---
 title: "1_データの事前分析"
 date: 2022-08-20T08:25:37Z
-draft: true
+draft: false
 categories: ["1_データ前処理"]
 tags: ["1_データ前処理"]
 toc:

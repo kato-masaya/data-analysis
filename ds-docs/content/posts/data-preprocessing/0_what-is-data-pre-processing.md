@@ -1,7 +1,7 @@
 ---
 title: "データの前処理とは"
 date: 2022-08-19T16:12:51Z
-draft: true
+draft: false
 categories: ["1_データ前処理"]
 tags: ["1_データ前処理"]
 toc:

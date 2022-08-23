@@ -1,7 +1,7 @@
 ---
 title: "0_クリーニング作業のポイント"
 date: 2022-08-20T08:30:33Z
-draft: true
+draft: false
 categories: ["1_データ前処理", "データクリーニング"]
 tags: ["1_データ前処理", "データクリーニング"]
 toc:
