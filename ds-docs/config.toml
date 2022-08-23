@@ -151,7 +151,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     # whether to omit favicon resource links
     noFavicon = false
     # modern SVG favicon to use in place of older style .png and .ico files
-    svgFavicon = "images/kamome.svg"
+    svgFavicon = "/images/kamome.svg"
     # Android browser theme color
     themeColor = "#ffffff"
     # Safari mask icon color
@@ -191,7 +191,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       # Gravatar Email for preferred avatar in home page
       gravatarEmail = ""
       # URL of avatar shown in home page
-      avatarURL = "images/kamome.jpg"
+      avatarURL = "/images/kamome.jpg"
       # LoveIt CHANGED | 0.2.7 title shown in home page (HTML format is supported)
       title = "Rudimentary Data Analysis Docs"
       # subtitle shown in home page (HTML format is supported)
