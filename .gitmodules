@@ -1,0 +1,3 @@
+[submodule "ds-docs/themes/LoveIt"]
+	path = ds-docs/themes/LoveIt
+	url = https://github.com/dillonzq/LoveIt.git
