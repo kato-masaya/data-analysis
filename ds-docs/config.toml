@@ -1,4 +1,4 @@
-baseURL = "https://kato-masaya.github.io/data-analysis/"
+baseURL = ""
 
 # Change the default theme to be use when building the site with Hugo
 theme = "LoveIt"
