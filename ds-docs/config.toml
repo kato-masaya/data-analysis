@@ -1,5 +1,4 @@
 baseURL = "http://kato-masaya.github.io/data-analysis/"
-publishDir = "docs"
 canonifyurls = true
 
 # Change the default theme to be use when building the site with Hugo
