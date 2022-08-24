@@ -10,7 +10,7 @@
 
 # 1. クリーニング作業でやるべきこと
 
-クリーニング作業でやるべきことは以下の通りです。
+クリーニング作業でやるべきことは以下のとおりです。
 
 - 列名の変更
 - 表記揺らぎのチェック
@@ -31,7 +31,7 @@
 
 以下参考にデータの列や型、表記など問題ないか確認してください。
 
-- データ確認時のコマンド（dfが対象のデータフレーム）
+- データ確認時のコマンド（`df = pd.DataFrame` としています）
 
 ```python
 #最大値、最小値、平均値、標準偏差などの参照
@@ -100,7 +100,7 @@ df_s["test"] = df_s["test"].astype(int) # integer
 df_s["test"] = pd.to_numeric(df_s["test"] , errors="coerce")
 ```
 
-なお、数値型に変換する場合には、事前に文字列を数値にしておいたり、Nullデータを0にしておいたり、といった作業も覚えておく必要があるので型チェック時には注意してください。
+なお、数値型に変換する場合には、事前に文字列を数値にしておいたり、Null データを 0 にしておいたりといった作業も覚えておく必要があるので型チェック時には注意してください。
 
 # 3. 重複行の削除
 
@@ -118,21 +118,21 @@ index=['idx01', 'idx02', 'idx03','idx04','idx05'])
 df
 ```
 
-- pandasデータフレームのdrop_duplicatesメソッド使用例
+- pandas データフレームの drop_duplicates メソッド使用例
 
 ```python
 df.drop_duplicates()
 ```
 
-引数に何も指定しない場合は、要素の値が全て重複する行を削除します。
+引数に何も指定しない場合は、要素の値がすべて重複する行を削除します。
 
-そのため、重複していたidx03とidx05が削除されます。
+そのため、重複していた idx03 と idx05 が削除されます。
 
 ```python
 df.drop_duplicates(subset=['col02'])
 ```
 
-カラムを指定して値の重複を削除するには、引数subsetにカラムを指定します。
+カラムを指定して値の重複を削除するには、引数 subset にカラムを指定します。
 
 実行します。
 
@@ -159,7 +159,7 @@ df
 df.loc[:,~df.columns.duplicated()]
 ```
 
-なお、以下のようにすると最後のaカラムが採用されます。（参考：[https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.duplicated.html](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.duplicated.html)）
+なお、以下のようにすると最後の a カラムが採用されます（参考：[https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.duplicated.html](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.duplicated.html)）。
 
 ```python
 df.loc[:,~df.columns.duplicated(keep = "last")]
