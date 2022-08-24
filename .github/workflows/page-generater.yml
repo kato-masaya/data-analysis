@@ -1,37 +1,37 @@
-name: DS Docs Generater
+# name: DS Docs Generater
 
-on:
-  push:
-    branches:
-      - main  
+# on:
+#   push:
+#     branches:
+#       - main  
 
-jobs:
-  publish:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          # Fetch Hugo themes (true OR recursive)
-          submodules: recursive 
-          # Fetch all history for .GitInfo and .Lastmod
-          fetch-depth: 0    
+# jobs:
+#   publish:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#         with:
+#           # Fetch Hugo themes (true OR recursive)
+#           submodules: recursive 
+#           # Fetch all history for .GitInfo and .Lastmod
+#           fetch-depth: 0    
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: 'latest'
-          # extended: true
+#       - name: Setup Hugo
+#         uses: peaceiris/actions-hugo@v2
+#         with:
+#           hugo-version: 'latest'
+#           # extended: true
 
-      - name: Build Hugo pages
-        run: hugo --minify
-        working-directory: ./ds-docs
+#       - name: Build Hugo pages
+#         run: hugo --minify
+#         working-directory: ./ds-docs
 
-      - name: Publish to GitHub Pages
-        # publish to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v3
-        # run on main branch only
-        if: ${{ github.ref == 'refs/heads/main' }}
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          # deploy the default output dir of Hugo
-          publish_dir: ./ds-docs/public 
+#       - name: Publish to GitHub Pages
+#         # publish to gh-pages branch
+#         uses: peaceiris/actions-gh-pages@v3
+#         # run on main branch only
+#         if: ${{ github.ref == 'refs/heads/main' }}
+#         with:
+#           github_token: ${{ secrets.GITHUB_TOKEN }}
+#           # deploy the default output dir of Hugo
+#           publish_dir: ./ds-docs/public 
