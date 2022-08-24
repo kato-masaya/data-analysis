@@ -1,6 +1,6 @@
-baseURL = "http://kato-masaya.github.io/data-analysis/"
+baseURL = "http://kato-masaya.github.io/"
 publishDir = "docs"
-canonifyurls = true
+canonifyurls = false
 
 # Change the default theme to be use when building the site with Hugo
 theme = "LoveIt"
